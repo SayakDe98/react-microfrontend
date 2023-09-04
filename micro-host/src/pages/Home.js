@@ -1,15 +1,23 @@
-import * as React from 'react';
-import "./styles.css";
-import TopBar from './TopBar';
+import React from 'react'
+import TopBar from '../components/TopBar';
 
-export default function App({ onChange }) {
-  const firstAppUrl = "http://localhost:8080";
-  const secondAppUrl = "http://localhost:8081";
-  const whichApp = window.location.origin.includes("8080") ? 1 : 2;
+const Home = ({ onChange }) => {
+     const firstAppUrl = "http://localhost:8080";
+     const secondAppUrl = "http://localhost:8081";
+     const whichApp = window.location.origin.includes("8080") ? 1 : 2;
   return (
     <>
       <TopBar backgroundColor="black" color="white" fontSize={20}>
-        <h1 style={{ textAlign: "initial", width: "100vw", margin: 0, marginLeft: "50px" }}>Micro App</h1>
+        <h1
+          style={{
+            textAlign: "initial",
+            width: "100vw",
+            margin: 0,
+            marginLeft: "50px",
+          }}
+        >
+          Micro App
+        </h1>
       </TopBar>
       <div className="MicroApp">
         <input onChange={onChange} type="text" placeholder="Enter your name" />
@@ -27,3 +35,5 @@ export default function App({ onChange }) {
     </>
   );
 }
+
+export default Home

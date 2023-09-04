@@ -1,22 +1,63 @@
 import React, { lazy, Suspense } from "react";
 import "./styles.css";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 
-const FirstApp = lazy(() => import("FIRST_APP/app"));
+const LoginPage = lazy(() => import("FIRST_APP/pages/login"));
 
 const App = () => {
-  const [name, setName] = React.useState(null);
 
   return (
-    <div className="App">
-      <h1>This is second app</h1>
-      <h2>Micro host app is integrated here</h2>
-      { name ? <p>Your name is: {name}</p> : null }
+    <>
       <div>
-        <Suspense fallback={<span>Loading...</span>}>
-          <FirstApp onChange={(e) => setName(e.target.value)} />
-        </Suspense>
+        <Router>
+          <Suspense
+            fallback={
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "100vw",
+                  height: "100vh",
+                  color: "white",
+                  backgroundColor: "black",
+                  fontFamily: "sans-serif",
+                }}
+              >
+                <h1>Loading...</h1>
+              </div>
+            }
+          >
+            <Routes>
+              <Route Component={Home} path="/" />
+              <Route element={<Suspense fallback="loading"><LoginPage /></Suspense>} path="/login" />
+              {/* <Route element={
+              <Suspense fallback={<div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "100vw",
+                  height: "100vh",
+                  color: "white",
+                  backgroundColor: "black",
+                  fontFamily: "sans-serif",
+                }}
+              >
+                <h1>Loading...</h1>
+              </div>}
+             >{
+             LoginPage
+             } </Suspense>
+             } path="/login" /> */}
+            </Routes>
+          </Suspense>
+        </Router>
       </div>
-    </div>
+    </>
   );
 };
 

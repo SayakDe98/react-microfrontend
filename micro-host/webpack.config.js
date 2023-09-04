@@ -8,6 +8,10 @@ module.exports = {
   resolve: {
     extensions: [".css", ".scss", ".js", ".jsx"],
   },
+  devServer: {
+    historyApiFallback: true,
+    open: true,
+  },
   module: {
     rules: [
       {
@@ -50,6 +54,8 @@ module.exports = {
       filename: "remoteEntry.js",
       exposes: {
         "./app": "./src/components/App",
+        "./components/footer": "./src/components/Footer",
+        "./pages/login": "./src/pages/Login",
       },
     }),
   ],
