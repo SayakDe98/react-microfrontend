@@ -1,15 +1,21 @@
-import React, { lazy } from 'react'
-import { Link } from 'react-router-dom';
+import React, { Suspense, lazy } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 const FirstApp = lazy(() => import("FIRST_APP/app"));
+const FirstAppHomePage = lazy(() => import("FIRST_APP/pages/Home"));
 const Footer = lazy(() => import("FIRST_APP/components/footer"));
 
 
 const Home = () => {
   const [name, setName] = React.useState(null);
+  const navigate = useNavigate();
 
   return (
     <>
-      <FirstApp onChange={(e) => setName(e.target.value)} />
+      {/* <FirstApp onChange={(e) => setName(e.target.value)} /> */}
+      <Suspense fallback="loading">
+        <FirstAppHomePage navigateToPage={() => navigate} onChange={(e) => setName(e.target.value)} />
+      </Suspense>
+
       <div className="App">
         <h1>This is second app</h1>
         <h2>Micro host app is integrated here</h2>
@@ -18,7 +24,9 @@ const Home = () => {
             <b>Your name is: {name}</b>
           </p>
         ) : null}
-        <Link to="/login">Go to Login Page</Link>
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          Go to Login Page
+        </Link>
       </div>
       <Footer backgroundColor="black" color="white" fontSize={20}>
         <h1

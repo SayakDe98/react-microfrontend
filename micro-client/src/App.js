@@ -2,8 +2,9 @@ import React, { lazy, Suspense } from "react";
 import "./styles.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-
-const LoginPage = lazy(() => import("FIRST_APP/pages/login"));
+import Login from "./pages/Login";
+// const Home = lazy(() => import('./pages/Home'));
+// const LoginPage = lazy(() => import("FIRST_APP/pages/login"));
 
 const App = () => {
 
@@ -31,8 +32,16 @@ const App = () => {
             }
           >
             <Routes>
-              <Route Component={Home} path="/" />
-              <Route element={<Suspense fallback="loading"><LoginPage /></Suspense>} path="/login" />
+              <Route
+                element={
+                  <Suspense fallback="loading">
+                    <Home />
+                  </Suspense>
+                }
+                path="/"
+              />
+              {/* <Route element={<Suspense fallback="loading"><Login /></Suspense>} path="/login" /> */}
+              <Route Component={Login} path="/login" />
               {/* <Route element={
               <Suspense fallback={<div
                 style={{

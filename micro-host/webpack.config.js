@@ -52,10 +52,16 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "FIRST_APP",
       filename: "remoteEntry.js",
+      shared: {...deps.dependencies, ...deps.peerDependencies},
       exposes: {
         "./app": "./src/components/App",
+        "./pages/Home": "./src/pages/Home",
         "./components/footer": "./src/components/Footer",
+        "./components/header": "./src/components/TopBar",
         "./pages/login": "./src/pages/Login",
+        "./styles/login": "./src/pages/Login.module.css",
+        "./components/card": "./src/components/Card.js",
+        "./utils/login": "./src/utils/login"
       },
     }),
   ],

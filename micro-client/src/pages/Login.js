@@ -1,14 +1,16 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { lazy } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import style from "./Login.module.css";
+// const style = lazy(() => import("FIRST_APP/styles/login"));
+import style from "./styles.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { useDispatch } from "react-redux";
 // import { authActions } from "../store/auth-slice";
-import { login } from "../utils/login";
-import Card from "../components/Card";
-import TopBar from "../components/TopBar";
+// const { login } = lazy(() => import("FIRST_APP/utils/login"));
+import { login } from "../utils/login"
+const Card = lazy(() => import("FIRST_APP/components/card"));
+const TopBar = lazy(() => import("FIRST_APP/components/header"));
 
 const Login = () => {
   const navigate = useNavigate();
